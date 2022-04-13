@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Suspense } from "react";
 import { RemoteComponent } from "./features/module-federation";
 
 function App() {
@@ -13,12 +13,16 @@ function App() {
       }}
     >
       I'm shell!
-      <RemoteComponent
-        module="./Content"
-        relativePath="/content_mf"
-        remoteComponentProps={{}}
-        scope="content"
-      />
+      <div>
+        <Suspense fallback={<div>Loading Main app...</div>}>
+          <RemoteComponent
+            module="./Content"
+            relativePath="/content_mf"
+            remoteComponentProps={{}}
+            scope="react_microfrontends_content"
+          />
+        </Suspense>
+      </div>
     </div>
   );
 }

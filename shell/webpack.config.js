@@ -14,6 +14,7 @@ module.exports = {
         pathRewrite: { "^/content_mf": "" },
       },
     },
+    contentBase: path.join(__dirname, "build"),
     historyApiFallback: true,
     port: 3001,
     host: "0.0.0.0", // So that dev server can be accessed externally

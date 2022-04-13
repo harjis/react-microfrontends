@@ -1,9 +1,19 @@
 import React from "react";
 
-import "./Content.css";
-
 const Content = () => {
-  return <div className="container">I'm content</div>;
+  return (
+    <div
+      style={{
+        height: "100%",
+        width: "100%",
+        display: "flex",
+        background: "lightblue",
+        justifyContent: "center",
+      }}
+    >
+      I'm content
+    </div>
+  );
 };
 
 export default Content;

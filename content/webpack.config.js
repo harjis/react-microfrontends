@@ -7,6 +7,7 @@ module.exports = {
   entry: "./src/index",
   mode: "development",
   devServer: {
+    contentBase: path.join(__dirname, "dist"),
     port: 3002,
     host: "0.0.0.0", // So that dev server can be accessed externally
   },
