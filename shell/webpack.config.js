@@ -8,6 +8,12 @@ module.exports = {
   entry: "./src/index",
   mode: "development",
   devServer: {
+    proxy: {
+      "/content_mf": {
+        target: "http://content:3002/",
+        pathRewrite: { "^/content_mf": "" },
+      },
+    },
     historyApiFallback: true,
     port: 3001,
     host: "0.0.0.0", // So that dev server can be accessed externally
