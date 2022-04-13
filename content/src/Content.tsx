@@ -1,19 +1,11 @@
 import React from "react";
 
+// TODO FIX
+// @ts-ignore
+import css from "./Content.module.css";
+
 const Content = () => {
-  return (
-    <div
-      style={{
-        height: "100%",
-        width: "100%",
-        display: "flex",
-        background: "lightblue",
-        justifyContent: "center",
-      }}
-    >
-      I'm content
-    </div>
-  );
+  return <div className={css.container}>I'm content</div>;
 };
 
 export default Content;
