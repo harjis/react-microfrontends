@@ -8,7 +8,6 @@ module.exports = {
   entry: "./src/index",
   mode: "development",
   devServer: {
-    static: "./build",
     historyApiFallback: true,
     port: 3001,
     host: "0.0.0.0", // So that dev server can be accessed externally
