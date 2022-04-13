@@ -7,8 +7,7 @@ module.exports = {
   entry: "./src/index",
   mode: "development",
   devServer: {
-    contentBase: path.join(__dirname, "dist"),
-    port: 3001,
+    port: 3002,
     host: "0.0.0.0", // So that dev server can be accessed externally
   },
   output: {
@@ -21,10 +20,10 @@ module.exports = {
   },
   plugins: [
     new ModuleFederationPlugin({
-      name: "main_frontend",
+      name: "react_microfrontends_content",
       filename: "remoteEntry.js",
       exposes: {
-        "./MainApp": "./src/components/MainApp",
+        "./Content": "./src/Content",
       },
       shared: {
         react: {
