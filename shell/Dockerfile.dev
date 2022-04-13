@@ -1,0 +1,10 @@
+FROM node:alpine
+
+WORKDIR /shell
+COPY package.json .
+RUN npm install
+COPY . .
+
+RUN apk --no-cache add gettext
+
+CMD ["npm", "start"]
