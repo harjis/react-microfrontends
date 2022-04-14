@@ -13,3 +13,9 @@ services:
       dockerfile: Dockerfile.dev
     ports:
       - "3002:3002"
+  svelte-content:
+    build:
+      context: ./svelte-content
+      dockerfile: Dockerfile.dev
+    ports:
+      - "3003:3003"
