@@ -1,48 +1,175 @@
-# Svelte + TS + Vite
+# Svelte Webpack Starter
 
-This template should help get you started developing with Svelte and TypeScript in Vite.
+A starter template for [Svelte](https://svelte.dev) that comes preconfigured with Webpack, TypeScript, SCSS, Babel,
+Autoprefixer, and HMR.
 
-## Recommended IDE Setup
+- [Getting started](#getting-started)
+	- [Installation](#installation)
+	- [Starting the development server](#starting-the-development-server)
+	- [Building for production](#building-for-production)
+	- [Running in production](#running-in-production)
+- [Usage](#usage)
+	- [Global stylesheets](#global-stylesheets)
+	- [Single page applications](#single-page-applications)
+	- [Browsers list](#browsers-list)
+	- [Babel customization](#babel-customization)
+	- [Source maps in production](#source-maps-in-production)
+	- [Import path aliases](#import-path-aliases)
 
-[VS Code](https://code.visualstudio.com/) + [Svelte](https://marketplace.visualstudio.com/items?itemName=svelte.svelte-vscode).
+---
 
-## Need an official Svelte framework?
+## Getting started
 
-Check out [SvelteKit](https://github.com/sveltejs/kit#readme), which is also powered by Vite. Deploy anywhere with its serverless-first approach and adapt to various platforms, with out of the box support for TypeScript, SCSS, and Less, and easily-added support for mdsvex, GraphQL, PostCSS, Tailwind CSS, and more.
+### Installation
 
-## Technical considerations
+Pull the template files with [`degit`](https://github.com/Rich-Harris/degit) and install dependencies.
 
-**Why use this over SvelteKit?**
+**🚀 Webpack 5 (recommended)**
 
-- It brings its own routing solution which might not be preferable for some users.
-- It is first and foremost a framework that just happens to use Vite under the hood, not a Vite app.
-  `vite dev` and `vite build` wouldn't work in a SvelteKit environment, for example.
+```bash
+npx degit baileyherbert/svelte-webpack-starter
+npm install
+```
 
-This template contains as little as possible to get started with Vite + TypeScript + Svelte, while taking into account the developer experience with regards to HMR and intellisense. It demonstrates capabilities on par with the other `create-vite` templates and is a good starting point for beginners dipping their toes into a Vite + Svelte project.
+**🚀 Webpack 4**
 
-Should you later need the extended capabilities and extensibility provided by SvelteKit, the template has been structured similarly to SvelteKit so that it is easy to migrate.
+```bash
+npx degit baileyherbert/svelte-webpack-starter#4
+npm install
+```
 
-**Why `global.d.ts` instead of `compilerOptions.types` inside `jsconfig.json` or `tsconfig.json`?**
+### Starting the development server
 
-Setting `compilerOptions.types` shuts out all other types not explicitly listed in the configuration. Using triple-slash references keeps the default TypeScript setting of accepting type information from the entire workspace, while also adding `svelte` and `vite/client` type information.
+Run the `dev` script to start a live development server with hot module replacement. Then check the output for a link
+to the app, which is usually `http://localhost:8080/`:
 
-**Why include `.vscode/extensions.json`?**
+```bash
+npm run dev
+```
 
-Other templates indirectly recommend extensions via the README, but this file allows VS Code to prompt the user to install the recommended extension upon opening the project.
+### Building for production
 
-**Why enable `allowJs` in the TS template?**
+Run the `build` script to bundle the app for production. The bundle will be created at `/public/build/` and the `public`
+directory will contain all files you need to host the app:
 
-While `allowJs: false` would indeed prevent the use of `.js` files in the project, it does not prevent the use of JavaScript syntax in `.svelte` files. In addition, it would force `checkJs: false`, bringing the worst of both worlds: not being able to guarantee the entire codebase is TypeScript, and also having worse typechecking for the existing JavaScript. In addition, there are valid use cases in which a mixed codebase may be relevant.
+```bash
+npm run build
+```
 
-**Why is HMR not preserving my local component state?**
+> 💡 **Tip:** You can quickly test the production build by running `npm start` locally.
 
-HMR state preservation comes with a number of gotchas! It has been disabled by default in both `svelte-hmr` and `@sveltejs/vite-plugin-svelte` due to its often surprising behavior. You can read the details [here](https://github.com/rixo/svelte-hmr#svelte-hmr).
+### Running in production
 
-If you have state that's important to retain within a component, consider creating an external store which would not be replaced by HMR.
+First upload the following files and folders to your target server:
+
+- `package.json`
+- `package-lock.json`
+- `public`
+
+Then install dependencies:
+
+```bash
+npm install --production
+```
+
+Finally run the `start` command to launch the included web server:
+
+```bash
+npm start
+```
+
+---
+
+## Usage
+
+### Global stylesheets
+
+Add one or more global stylesheets to the bundle by editing the `stylesheets` variable at the top of
+`webpack.config.ts`:
 
 ```ts
-// store.ts
-// An extremely simple external store
-import { writable } from 'svelte/store'
-export default writable(0)
+const stylesheets = [
+    './src/styles/index.scss'
+];
+```
+
+You can specify `css`, `scss`, and `sass` files here, and they will be compiled and minified as necessary. These styles
+will be added to the beginning of the bundle in the order specified. Svelte's styles will always appear last.
+
+### Single page applications
+
+For single page applications that use history routing instead of hash routing, edit the `package.json` file to serve
+the `index.html` file when a requested file is not found:
+
+- Add the `--history-api-fallback` flag to the `"dev"` command
+- Add the `--single` flag to the `"start"` command.
+
+```json
+"scripts": {
+    "dev": "webpack serve --history-api-fallback",
+    "start": "serve public --listen 8080 --single",
+}
+```
+
+### Browsers list
+
+The bundle will be compiled to run on the browsers specified in `package.json`:
+
+```json
+"browserslist": [
+    "defaults"
+]
+```
+
+The default value is recommended. If you wish to customize this, please refer to the list of
+[example browserslist queries](https://github.com/browserslist/browserslist#full-list).
+
+> 💡 **Note:** This template includes `core-js` and `regenerator-runtime` which means your source code will be
+> transpiled and polyfilled to run on old browsers automatically.
+
+### Babel customization
+
+Production builds are compiled with Babel automatically. If you wish to disable it, edit the `webpack.config.ts` file:
+
+```ts
+const useBabel = false;
+```
+
+Babel is disabled during development in order to improve build speeds. Please enable it manually if you need:
+
+```ts
+const useBabelInDevelopment = true;
+```
+
+### Source maps in production
+
+Source maps are generated automatically during development. They are not included in production builds by default. If
+you wish to change this behavior, edit the `webpack.config.ts` file:
+
+```ts
+const sourceMapsInProduction = true;
+```
+
+### Import path aliases
+
+Define import path aliases from the `tsconfig.json` file. For example:
+
+```json
+"paths": {
+    "@stores/*": ["src/stores/*"]
+}
+```
+
+You can then import files under these aliases and Webpack will resolve them. Your code editor should also use them
+for automatic imports:
+
+```ts
+import { users } from '@stores/users'; // src/stores/users.ts
+```
+
+The root directory is configured as a base path for imports. This means you can also import modules with an absolute
+path from anywhere in the project instead of using a large number of `..` to traverse directories.
+
+```ts
+import { users } from 'src/stores/users';
 ```

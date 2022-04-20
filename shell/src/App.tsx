@@ -1,5 +1,6 @@
 import React, { Suspense } from "react";
 import { RemoteComponent } from "./features/module-federation";
+import { RemoteSvelteComponent } from "./features/module-federation-svelte/RemoteSvelteComponent";
 
 function App() {
   return (
@@ -14,12 +15,22 @@ function App() {
     >
       I'm shell!
       <div>
-        <Suspense fallback={<div>Loading Main app...</div>}>
+        <Suspense fallback={<div>Loading Main app failed</div>}>
           <RemoteComponent
             module="./Content"
             relativePath="/content_mf"
             remoteComponentProps={{}}
             scope="react_microfrontends_content"
+          />
+        </Suspense>
+      </div>
+      <div>
+        <Suspense fallback={<div>Loading Main app failed</div>}>
+          <RemoteSvelteComponent
+            module="./loadApp"
+            relativePath="/svelte_content_mf"
+            remoteComponentProps={{}}
+            scope="react_microfrontends_svelte_content"
           />
         </Suspense>
       </div>

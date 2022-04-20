@@ -1,21 +1,17 @@
 <script lang="ts">
-  import Counter from './lib/Counter.svelte'
+	let name: string = 'svelte';
 </script>
 
-<style>
+<style lang="scss">
   div {
     height: 100%;
     width: 100%;
-    background-color: lightgreen;
     display: flex;
     justify-content: center;
-    align-items: center;
-    flex-direction: column;
+    background-color: lightgreen;
   }
 </style>
 
 <div>
-  <p>I'm Svelte content!</p>
-  <Counter />
+    I'm {name} content
 </div>
-

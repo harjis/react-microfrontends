@@ -13,6 +13,11 @@ module.exports = {
         target: "http://content:3002/",
         pathRewrite: { "^/content_mf": "" },
       },
+
+      "/svelte_content_mf": {
+        target: "http://svelte-content:3003/",
+        pathRewrite: { "^/svelte_content_mf": "" },
+      },
     },
     contentBase: path.join(__dirname, "build"),
     historyApiFallback: true,
