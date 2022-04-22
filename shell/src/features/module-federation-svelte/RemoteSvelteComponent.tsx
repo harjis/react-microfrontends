@@ -1,8 +1,7 @@
-import React, { useEffect } from "react";
+import React from "react";
 
 import { useDynamicScript } from "./useDynamicScript";
-import { loadComponent } from "./utils";
-import { Wat } from "./Wat";
+import { SvelteComponent } from "./SvelteComponent";
 
 type Props<RemoteComponentProps> = {
   module: string;
@@ -32,15 +31,5 @@ export const RemoteSvelteComponent = <RemoteComponentProps,>(
     return <h2>Failed to load dynamic script: {remote.url}</h2>;
   }
 
-  const mod = loadComponent(remote.scope, remote.module);
-  console.log(mod());
-
-  // window.header.get("./Header").then((module) => {
-  //   const Header = module().default;
-  //   new Header({
-  //     target: document.getElementById("header"),
-  //   });
-  // });
-
-  return <Wat scope={remote.scope} module={remote.module} />;
+  return <SvelteComponent scope={remote.scope} module={remote.module} />;
 };

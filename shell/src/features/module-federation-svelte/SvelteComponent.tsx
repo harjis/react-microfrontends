@@ -5,7 +5,7 @@ type Props = {
   scope: string;
   module: string;
 };
-export const Wat = (props: Props) => {
+export const SvelteComponent = (props: Props) => {
   const ref = useRef(null);
 
   useEffect(() => {
