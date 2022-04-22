@@ -1,1 +1,2 @@
-export { RemoteComponent } from "./RemoteComponent";
+export {RemoteComponent} from "./RemoteComponent";
+export {RemoteSvelteComponent} from "./RemoteSvelteComponent";
