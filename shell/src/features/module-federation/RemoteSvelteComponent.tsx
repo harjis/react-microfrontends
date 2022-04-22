@@ -24,11 +24,11 @@ export const RemoteSvelteComponent = <RemoteComponentProps,>(
   });
 
   if (!ready) {
-    return <h2>Loading dynamic script: {remote.url}</h2>;
+    return <span>Loading...</span>;
   }
 
   if (failed) {
-    return <h2>Failed to load dynamic script: {remote.url}</h2>;
+    return <span>Failed to load dynamic script: {remote.url}</span>;
   }
 
   return <SvelteComponent scope={remote.scope} module={remote.module} />;

@@ -14,8 +14,7 @@ function App() {
         flexDirection: "column"
       }}
     >
-      I'm shell!
-      <div>
+        I'm shell!
         <Suspense fallback={<div>Loading Main app failed</div>}>
           <RemoteComponent
             module="./Content"
@@ -32,7 +31,6 @@ function App() {
             scope="react_microfrontends_svelte_content"
           />
         </Suspense>
-      </div>
     </div>
   );
 }
