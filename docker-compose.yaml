@@ -19,3 +19,9 @@ services:
       dockerfile: Dockerfile.dev
     ports:
       - "3003:3003"
+  svelte-content-vite:
+    build:
+      context: ./svelte-content-vite
+      dockerfile: Dockerfile.dev
+    ports:
+      - "3004:3004"
